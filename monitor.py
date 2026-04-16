@@ -25,7 +25,7 @@ while True:
         res = requests.get(URL, headers=headers, timeout=10)
         text = res.text
     
-        if "재입고알림 신청하기" in text:
+        if "재입고알림 신청하기" in text or "상담원 연결" in text:
             print("❌ 품절 상태 유지")
         else:
             send_telegram("🔥 재고 있음!!!\n" + URL)
