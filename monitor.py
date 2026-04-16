@@ -1,5 +1,6 @@
 import requests
 import time
+import random
 
 BOT_TOKEN = "8513786315:AAFNkNtWxWhHoe9c-x_4PecU7nCu7lc73IE"
 CHAT_ID = "6109809618"
@@ -34,5 +35,4 @@ while True:
     except Exception as e:
         print("에러:", e)
 
-    import random
 time.sleep(300 + random.randint(100, 200))
