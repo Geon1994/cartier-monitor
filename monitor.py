@@ -24,17 +24,13 @@ while True:
     try:
         res = requests.get(URL, headers=headers, timeout=10)
         text = res.text
-
-        if "OutOfStock" in text:
-    print("❌ 품절")
-elif "InStock" in text:
-    send_telegram("🔥 재고 있음!")
-    break
-else:
-    print("⚠️ 상태 불명")
-
-        print("❌ 아직 품절")
-
+    if "OutOfStock" in text:
+        print("❌ 품절")
+    elif "InStock" in text:
+        send_telegram("🔥 재고 있음!")
+        break
+    else:
+        print("⚠️ 상태 불명")
     except Exception as e:
         print("에러:", e)
 
