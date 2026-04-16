@@ -34,4 +34,4 @@ while True:
     except Exception as e:
         print("에러:", e)
 
-    time.sleep(3600)
+    time.sleep(60)
