@@ -21,19 +21,19 @@ def send_telegram(msg):
 print("🚀 1분 단위 재고 감시 시작")
 
 while True:
-try:
-    res = requests.get(URL, headers=headers, timeout=10)
-    text = res.text
+    try:
+        res = requests.get(URL, headers=headers, timeout=10)
+        text = res.text
     
-    if "OutOfStock" in text:
-        print("❌ 품절")
-    elif "InStock" in text:
-        send_telegram("🔥 재고 있음!")
-        break
-    else:
-        print("⚠️ 상태 불명")
+        if "OutOfStock" in text:
+            print("❌ 품절")
+        elif "InStock" in text:
+            send_telegram("🔥 재고 있음!")
+            break
+        else:
+            print("⚠️ 상태 불명")
         
-except Exception as e:
-    print("에러:", e)
+    except Exception as e:
+        print("에러:", e)
 
-time.sleep(300 + random.randint(100, 200))
+    time.sleep(300 + random.randint(100, 200))
