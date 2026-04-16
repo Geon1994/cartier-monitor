@@ -16,18 +16,20 @@ def send_telegram(msg):
         data={"chat_id": CHAT_ID, "text": msg}
     )
 
-print("🚀 시작")
+print("🚀 재고 모니터링 시작")
 
 while True:
     try:
         res = requests.get(URL, headers=headers)
         text = res.text
 
-        if "상담원 연결" not in text:
-            send_telegram("🔥 재고 상태 변화 감지! 확인 필요!\n" + URL)
+        if "InStock" in text:
+            send_telegram("🔥 재고 있음! 바로 구매 가능!\n" + URL)
             break
+        elif "OutOfStock" in text:
+            print("❌ 품절 상태 유지")
         else:
-            print("❌ 아직 재고 없음")
+            print("⚠️ 상태 확인 필요 (패턴 없음)")
 
     except Exception as e:
         print("에러:", e)
