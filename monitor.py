@@ -34,4 +34,5 @@ while True:
     except Exception as e:
         print("에러:", e)
 
-    time.sleep(60)
+    import random
+time.sleep(300 + random.randint(120, 210))
