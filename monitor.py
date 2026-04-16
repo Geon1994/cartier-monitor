@@ -25,16 +25,12 @@ while True:
         res = requests.get(URL, headers=headers, timeout=10)
         text = res.text
     
-        if "쇼핑백에 추가하기" in text:
+        if "재입고알림 신청하기" in text:
+            print("❌ 품절 상태 유지")
+        else:
             send_telegram("🔥 재고 있음!!!\n" + URL)
             print("🔥 감지 성공")
             break
-
-        elif "상담원 연결" in text:
-            print("❌ 품절 상태 유지")
-
-        else:
-            print("⚠️ 구조 확인 필요")
         
     except Exception as e:
         print("에러:", e)
