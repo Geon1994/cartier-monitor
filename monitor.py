@@ -1,9 +1,5 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-import time
 import requests
+import time
 
 BOT_TOKEN = "8513786315:AAFNkNtWxWhHoe9c-x_4PecU7nCu7lc73IE"
 CHAT_ID = "6109809618"
@@ -16,34 +12,17 @@ def send_telegram(msg):
         data={"chat_id": CHAT_ID, "text": msg}
     )
 
-options = Options()
-options.add_argument("--headless=new")
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
-options.add_argument("--disable-gpu")
-options.add_argument("--window-size=1920,1080")
-
-driver = webdriver.Chrome(
-    service=Service(ChromeDriverManager().install()),
-    options=options
-)
-
 print("🚀 시작")
 
 while True:
     try:
-        driver.get(URL)
-        time.sleep(5)
+        res = requests.get(URL, headers={
+            "User-Agent": "Mozilla/5.0"
+        })
 
-        buttons = driver.find_elements("tag name", "button")
+        text = res.text
 
-        found = False
-        for b in buttons:
-            if "쇼핑백에 추가하기" in b.text:
-                found = True
-                break
-
-        if found:
+        if "쇼핑백에 추가하기" in text:
             send_telegram("🔥 재고 있음!")
             break
         else:
