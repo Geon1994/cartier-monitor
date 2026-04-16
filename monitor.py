@@ -25,10 +25,13 @@ while True:
         res = requests.get(URL, headers=headers, timeout=10)
         text = res.text
 
-        if "InStock" in text:
-            send_telegram("🔥 재고 있음!!! 지금 바로 구매!!!\n" + URL)
-            print("🔥 감지 성공")
-            break
+        if "OutOfStock" in text:
+    print("❌ 품절")
+elif "InStock" in text:
+    send_telegram("🔥 재고 있음!")
+    break
+else:
+    print("⚠️ 상태 불명")
 
         print("❌ 아직 품절")
 
